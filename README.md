@@ -8,15 +8,14 @@
 [![License](https://img.shields.io/npm/l/terrastack-cli.svg)](https://github.com/terrastackio/terrastack-cli/blob/master/package.json)
 
 <!-- toc -->
-
-- [Usage](#usage)
-- [Commands](#commands)
-  <!-- tocstop -->
+* [terrastack-cli](#terrastack-cli)
+* [Usage](#usage)
+* [Commands](#commands)
+<!-- tocstop -->
 
 # Usage
 
 <!-- usage -->
-
 ```sh-session
 $ npm install -g terrastack-cli
 $ terrastack COMMAND
@@ -28,33 +27,33 @@ USAGE
   $ terrastack COMMAND
 ...
 ```
-
 <!-- usagestop -->
 
 # Commands
 
 <!-- commands -->
+* [`terrastack component`](#terrastack-component)
+* [`terrastack help [COMMAND]`](#terrastack-help-command)
+* [`terrastack stack:apply`](#terrastack-stackapply)
+* [`terrastack stack:destroy`](#terrastack-stackdestroy)
+* [`terrastack stack:info`](#terrastack-stackinfo)
+* [`terrastack stack:plan`](#terrastack-stackplan)
 
-- [`terrastack hello`](#terrastack-hello)
-- [`terrastack help [COMMAND]`](#terrastack-help-command)
+## `terrastack component`
 
-## `terrastack hello`
-
-Describe the command here
+Init a new component from a Terraform module
 
 ```
 USAGE
-  $ terrastack hello
+  $ terrastack component
 
 OPTIONS
-  -n, --name=name  name to print
-
-DESCRIPTION
-  ...
-  Extra documentation goes here
+  -d, --description=description  Brief description for package
+  -n, --name=name                (required) name of component
+  -t, --tag=tag                  (required) Which tag (version) to set for package
 ```
 
-_See code: [src/commands/hello.js](https://github.com/terrastackio/terrastack-cli/blob/v0.0.1/src/commands/hello.js)_
+_See code: [src/commands/component.js](https://github.com/terrastackio/terrastack-cli/blob/v0.0.1/src/commands/component.js)_
 
 ## `terrastack help [COMMAND]`
 
@@ -73,4 +72,47 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.1.2/src/commands/help.ts)_
 
+## `terrastack stack:apply`
+
+Apply the stack
+
+```
+USAGE
+  $ terrastack stack:apply
+```
+
+_See code: [src/commands/stack/apply.js](https://github.com/terrastackio/terrastack-cli/blob/v0.0.1/src/commands/stack/apply.js)_
+
+## `terrastack stack:destroy`
+
+Destroy the stack
+
+```
+USAGE
+  $ terrastack stack:destroy
+```
+
+_See code: [src/commands/stack/destroy.js](https://github.com/terrastackio/terrastack-cli/blob/v0.0.1/src/commands/stack/destroy.js)_
+
+## `terrastack stack:info`
+
+Get info about the stack
+
+```
+USAGE
+  $ terrastack stack:info
+```
+
+_See code: [src/commands/stack/info.js](https://github.com/terrastackio/terrastack-cli/blob/v0.0.1/src/commands/stack/info.js)_
+
+## `terrastack stack:plan`
+
+Plan the stack
+
+```
+USAGE
+  $ terrastack stack:plan
+```
+
+_See code: [src/commands/stack/plan.js](https://github.com/terrastackio/terrastack-cli/blob/v0.0.1/src/commands/stack/plan.js)_
 <!-- commandsstop -->
