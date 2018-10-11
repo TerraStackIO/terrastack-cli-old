@@ -1,6 +1,6 @@
 # terrastack-cli
 
-Terrastack CLI
+[Terrastack](https://github.com/TerraStackIO/terrastack) CLI
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/terrastack-cli.svg)](https://npmjs.org/package/terrastack-cli)
