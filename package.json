@@ -1,0 +1,59 @@
+{
+  "name": "terrastack-cli",
+  "description": "Terrastack CLI",
+  "version": "0.0.1",
+  "author": "Sebastian Korfmann",
+  "bin": {
+    "terrastack": "./bin/run"
+  },
+  "bugs": "https://github.com/terrastackio/terrastack-cli/issues",
+  "dependencies": {
+    "@oclif/command": "^1",
+    "@oclif/config": "^1",
+    "@oclif/plugin-help": "^2",
+    "mustache": "^3.0.0"
+  },
+  "devDependencies": {
+    "@oclif/dev-cli": "^1",
+    "eslint": "^5.5",
+    "eslint-config-oclif": "^3.1",
+    "globby": "^8"
+  },
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "files": [
+    "/bin",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json",
+    "/src"
+  ],
+  "homepage": "https://github.com/terrastackio/terrastack-cli",
+  "keywords": [
+    "terrastack",
+    "terraform",
+    "hcl"
+  ],
+  "license": "MPL-2.0",
+  "main": "src/index.js",
+  "oclif": {
+    "commands": "./src/commands",
+    "bin": "terrastack",
+    "plugins": [
+      "@oclif/plugin-help"
+    ],
+    "topics": {
+      "stack": {
+        "description": "Plan, apply or destroy a stack"
+      }
+    }
+  },
+  "repository": "terrastackio/terrastack-cli",
+  "scripts": {
+    "postpack": "rm -f oclif.manifest.json npm-shrinkwrap.json",
+    "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap",
+    "test": "jest",
+    "test-update-snapshot": "jest --updateSnapshot",
+    "version": "oclif-dev readme && git add README.md"
+  }
+}
