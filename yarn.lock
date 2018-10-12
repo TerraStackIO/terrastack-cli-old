@@ -1644,9 +1644,9 @@ has@^1.0.1:
   dependencies:
     function-bind "^1.1.1"
 
-hcl2json-foo@^0.2.3:
+hcl2json@^0.2.3:
   version "0.2.3"
-  resolved "https://registry.yarnpkg.com/hcl2json-foo/-/hcl2json-foo-0.2.3.tgz#1041674f06e5115ea3f76fcd0d75d7e5db42dd08"
+  resolved "https://registry.yarnpkg.com/hcl2json/-/hcl2json-0.2.3.tgz#a92aa114768d01c04e722b8a4503a488b0d692ef"
   dependencies:
     go-npm "^0.1.9"
 

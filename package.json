@@ -11,7 +11,7 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
-    "hcl2json-foo": "^0.2.3",
+    "hcl2json": "^0.2.3",
     "mustache": "^3.0.0"
   },
   "devDependencies": {

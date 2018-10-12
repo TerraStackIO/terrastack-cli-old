@@ -10,7 +10,7 @@ const template = require("fs-extra")
   .toString();
 const path = require("path");
 const hcl2json = path.resolve(
-  path.dirname(require.resolve("hcl2json-foo")),
+  path.dirname(require.resolve("hcl2json")),
   "node_modules",
   ".bin",
   "hcl2json"
