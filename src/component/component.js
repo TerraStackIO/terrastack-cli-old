@@ -8,6 +8,13 @@ const Mustache = require("mustache");
 const template = require("fs-extra")
   .readFileSync(require.resolve("./component.mustache"))
   .toString();
+const path = require("path");
+const hcl2json = path.resolve(
+  path.dirname(require.resolve("hcl2json")),
+  "node_modules",
+  ".bin",
+  "hcl2json"
+);
 
 // Disable HTML escaping
 Mustache.escape = e => e;
@@ -45,7 +52,7 @@ const descriptionText = value => {
 const parseAndRender = () => {
   const moduleJSON = JSON.parse(
     require("child_process")
-      .execSync("cat *.tf | json2hcl -reverse")
+      .execSync(`cat *.tf | ${hcl2json}`)
       .toString("UTF-8")
   );
 
