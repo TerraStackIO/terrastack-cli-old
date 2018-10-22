@@ -3,8 +3,8 @@
   "types": ".terrastack/@types/index.d.ts",
   "license": "MPL-2.0",
   "private": false,
-  "dependencies": {
-    "terrastack": "^0.1.0"
+  "peerDependencies": {
+    "terrastack": "*"
   },
   "terrastack": {
     "version": 1
