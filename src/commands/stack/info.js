@@ -5,26 +5,25 @@
  */
 
 const { Command, flags } = require("@oclif/command");
+const { Terrastack } = require("terrastack");
 
-const printInfo = stack => {
-  const components = stack
-    .list()
-    .map(component => `* ${component.name}`)
-    .join("\n");
-  const template = `
-Stack: ${stack.name}
-
-${components}
-    `.trim();
-
-  console.log(template);
+const printInfo = terrastack => {
+  console.log(`
+Terrastack Stack: ${terrastack.stack.name}
+------------`);
+  terrastack.componentChunks.map((chunk, index) => {
+    console.log(`
+Chunk ${index + 1}:
+${chunk.map(component => component.name).join("\n")}`);
+  });
 };
 
 class InfoCommand extends Command {
   async run() {
-    const stack = require(process.cwd() + "/stack.js");
     const { flags } = this.parse(InfoCommand);
-    printInfo(stack);
+    const stack = require(process.cwd() + "/stack.js");
+    const terrastack = new Terrastack(stack);
+    printInfo(terrastack);
   }
 }
 

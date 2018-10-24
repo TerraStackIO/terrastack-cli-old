@@ -1,5 +1,6 @@
 const log4js = require("log4js");
 const chalk = require("chalk");
+const _ = require("lodash");
 
 log4js.configure({
   appenders: {
@@ -34,7 +35,7 @@ const applyLogger = base => {
 
   base.events.on("error", function(component) {
     console.log(chalk.red.bold.underline(`Error: ${component.name}`));
-    console.log(`Recent output: ${buffer.join("")}`);
+    console.log(`Recent output: ${_.takeRight(buffer, 50).join("")}`);
   });
 };
 
