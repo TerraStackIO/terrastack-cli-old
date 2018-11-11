@@ -9,11 +9,14 @@ const componentCode = require("./component");
 const packageDefaults = require("./package");
 
 const initComponent = (name, version, description) => {
-  console.log(`Starting to init component "${name}" in version ${version}`);
+  console.log(`Starting to wrap component "${name}" in version ${version}`);
+
+  const files = componentCode(name, version, description);
 
   fs.ensureDirSync(".terrastack/component");
-  fs.writeFileSync(".terrastack/component/index.js", componentCode());
-  console.log("Writing .terrastack/component/index.js");
+  fs.ensureDirSync(".terrastack/@types");
+  fs.writeFileSync(".terrastack/component/index.js", files.compononentJs);
+  fs.writeFileSync(".terrastack/@types/index.d.ts", files.compononentTypes);
 
   const package = Object.assign(
     {},
@@ -22,8 +25,7 @@ const initComponent = (name, version, description) => {
   );
 
   fs.writeFileSync("package.json", JSON.stringify(package, null, 2));
-  console.log("Writing package.json");
-  console.log("Finished!");
+  console.log("Successfully wrapped component");
 };
 
 module.exports = initComponent;

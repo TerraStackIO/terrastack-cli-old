@@ -5,14 +5,17 @@
  */
 
 const { Command, flags } = require("@oclif/command");
+const { Terrastack } = require("terrastack");
+const applyLogging = require("../../logging.js");
 
 class DestroyCommand extends Command {
   async run() {
     const { flags } = this.parse(DestroyCommand);
     const stack = require(process.cwd() + "/stack.js");
-
+    const terrastack = new Terrastack(stack);
+    applyLogging(terrastack);
     (async () => {
-      await stack.destroy();
+      await terrastack.destroy();
     })();
   }
 }

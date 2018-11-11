@@ -1,0 +1,22 @@
+/// <reference types="node" />
+import { BaseComponent } from "terrastack";
+
+export as namespace {{ moduleName }};
+
+export = Component;
+
+declare class Component extends BaseComponent<Component.Configuration> {}
+
+declare namespace Component {
+  export interface Configuration extends object {
+    {{#variables}}
+    /**
+     * {{ description }}
+     *
+     * {{ defaultText }}
+     */
+    {{ property }}: {{ type }};
+
+    {{/variables}}
+  }
+}
