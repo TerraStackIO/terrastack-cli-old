@@ -1,7 +1,11 @@
 {
   "main": ".terrastack/component/index.js",
+  "types": ".terrastack/@types/index.d.ts",
   "license": "MPL-2.0",
   "private": false,
+  "peerDependencies": {
+    "terrastack": "*"
+  },
   "terrastack": {
     "version": 1
   }
