@@ -59,12 +59,16 @@ const parseAndRender = (name, version, description) => {
       .toString("UTF-8")
   );
 
-  const variables = moduleJSON.variable.map(element =>
-    Object.keys(element).map(k => ({
-      key: k,
-      value: element[k][0]
-    }))
-  );
+  let variables = [];
+
+  if (moduleJSON["variable"] !== undefined) {
+    variables = moduleJSON.variable.map(element =>
+      Object.keys(element).map(k => ({
+        key: k,
+        value: element[k][0]
+      }))
+    );
+  }
 
   const view = {
     moduleName: classify(name),
