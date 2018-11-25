@@ -4440,16 +4440,6 @@ tar@^4:
     safe-buffer "^5.1.2"
     yallist "^3.0.2"
 
-terrastack@^0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/terrastack/-/terrastack-0.2.0.tgz#c976762362e85f0c9975c89be2758fccfed35c27"
-  integrity sha512-MPS0zvvkVSXX0SQFS5vmNP8Tyrnpu24LQ9LvpBi3uh4CT5epZdxNoTJTDS9bHGCXEYWe2cRelJp4ZECdacWW0g==
-  dependencies:
-    eventemitter2 "^5.0.1"
-    fs-extra "^7.0.0"
-    lodash "^4.17.11"
-    recursive-copy "^2.0.9"
-
 test-exclude@^4.2.1:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/test-exclude/-/test-exclude-4.2.3.tgz#a9a5e64474e4398339245a0a769ad7c2f4a97c20"
