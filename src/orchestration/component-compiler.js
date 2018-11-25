@@ -8,6 +8,7 @@ const fs = require("fs-extra");
 const recursiveCopy = require("recursive-copy");
 const path = require("path");
 const eventbus = require("./eventbus");
+const format = require("es6-template-strings");
 
 const writeConfig = (stack, component) => {
   fs.writeFileSync(
@@ -17,30 +18,46 @@ const writeConfig = (stack, component) => {
 };
 
 const compileConfig = (stack, component) => {
-  const data = Object.keys(stack.config).map(key =>
-    stack.config[key].compile(`${stack.name}/${component.name}`)
-  );
+  const data = Object.keys(stack.config).map(key => {
+    const remoteStateKey =
+      component.options.remoteStateKey ||
+      "terrastack/${stackName}/${componentName}";
+    const context = {
+      stackName: stack.name,
+      componentName: component.name
+    };
+    return stack.config[key].compile(format(remoteStateKey, context));
+  });
   return Object.assign({}, ...data);
 };
 
-const writeInput = component => {
+const writeInput = (stack, component) => {
   fs.writeFileSync(
     path.join(component.workingDir, "terrastack.auto.tfvars"),
-    JSON.stringify(component.inputCallback(component.bindings), null, 2)
+    JSON.stringify(
+      Object.assign(
+        {},
+        stack.globals,
+        component.inputCallback(component.bindings, stack)
+      ),
+      null,
+      2
+    )
   );
 };
 
 const copySource = async component => {
   await recursiveCopy(component.sourceDir, component.workingDir, {
     filter: ["**/*", "!.terrastack"],
-    overwrite: true
+    overwrite: true,
+    expand: true
   });
 };
 
 const compile = async (stack, component) => {
   fs.emptyDirSync(component.workingDir);
   writeConfig(stack, component);
-  writeInput(component);
+  writeInput(stack, component);
   await copySource(component);
   eventbus.emit("component:compile", component);
 };

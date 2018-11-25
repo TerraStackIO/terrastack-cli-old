@@ -7,15 +7,21 @@
 [![Downloads/week](https://img.shields.io/npm/dw/terrastack-cli.svg)](https://npmjs.org/package/terrastack-cli)
 [![License](https://img.shields.io/npm/l/terrastack-cli.svg)](https://github.com/terrastackio/terrastack-cli/blob/master/package.json)
 
+```
+export NODE_PRESERVE_SYMLINKS=1 # make yarn link work properly for components - see: http://www.codetunnel.io/you-can-finally-npm-link-packages-that-contain-peer-dependencies/
+```
+
 <!-- toc -->
-* [terrastack-cli](#terrastack-cli)
-* [Usage](#usage)
-* [Commands](#commands)
-<!-- tocstop -->
+
+- [terrastack-cli](#terrastack-cli)
+- [Usage](#usage)
+- [Commands](#commands)
+  <!-- tocstop -->
 
 # Usage
 
 <!-- usage -->
+
 ```sh-session
 $ npm install -g terrastack-cli
 $ terrastack COMMAND
@@ -27,17 +33,19 @@ USAGE
   $ terrastack COMMAND
 ...
 ```
+
 <!-- usagestop -->
 
 # Commands
 
 <!-- commands -->
-* [`terrastack component`](#terrastack-component)
-* [`terrastack help [COMMAND]`](#terrastack-help-command)
-* [`terrastack stack:apply`](#terrastack-stackapply)
-* [`terrastack stack:destroy`](#terrastack-stackdestroy)
-* [`terrastack stack:info`](#terrastack-stackinfo)
-* [`terrastack stack:plan`](#terrastack-stackplan)
+
+- [`terrastack component`](#terrastack-component)
+- [`terrastack help [COMMAND]`](#terrastack-help-command)
+- [`terrastack stack:apply`](#terrastack-stackapply)
+- [`terrastack stack:destroy`](#terrastack-stackdestroy)
+- [`terrastack stack:info`](#terrastack-stackinfo)
+- [`terrastack stack:plan`](#terrastack-stackplan)
 
 ## `terrastack component`
 
@@ -115,4 +123,5 @@ USAGE
 ```
 
 _See code: [src/commands/stack/plan.js](https://github.com/terrastackio/terrastack-cli/blob/v0.2.0/src/commands/stack/plan.js)_
+
 <!-- commandsstop -->
