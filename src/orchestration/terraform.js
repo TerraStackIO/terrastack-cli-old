@@ -88,9 +88,9 @@ class Terraform {
         eventbus.emit(`component:output:success`, this.component);
       },
       code => {
-        eventbus.emit(`component:output:failed`, this.component, code);
-        eventbus.emit("error", this.component);
-        throw "failed";
+        // eventbus.emit(`component:output:failed`, this.component, code);
+        // eventbus.emit("error", this.component);
+        // throw "failed";
       }
     );
   }
