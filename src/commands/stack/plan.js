@@ -5,7 +5,7 @@
  */
 
 const { Command, flags } = require("@oclif/command");
-const { Terrastack } = require("terrastack");
+const { Terrastack } = require("../../orchestration/terrastack");
 const applyLogging = require("../../logging.js");
 
 class PlanCommand extends Command {
