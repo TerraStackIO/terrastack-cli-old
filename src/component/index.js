@@ -18,13 +18,13 @@ const initComponent = (name, version, description) => {
   fs.writeFileSync(".terrastack/component/index.js", files.compononentJs);
   fs.writeFileSync(".terrastack/@types/index.d.ts", files.compononentTypes);
 
-  const package = Object.assign(
+  const packageJSON = Object.assign(
     {},
     { name, version, description },
     packageDefaults
   );
 
-  fs.writeFileSync("package.json", JSON.stringify(package, null, 2));
+  fs.writeFileSync("package.json", JSON.stringify(packageJSON, null, 2));
   console.log("Successfully wrapped component");
 };
 

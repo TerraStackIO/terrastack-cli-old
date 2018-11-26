@@ -7,7 +7,7 @@
 const { Command, flags } = require("@oclif/command");
 const { Terrastack } = require("../../orchestration/terrastack");
 const applyLogging = require("../../logging.js");
-const applyVisualization = require("../../visualization.js");
+const { applyVisualization } = require("../../ui");
 
 class DestroyCommand extends Command {
   async run() {
