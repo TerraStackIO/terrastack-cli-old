@@ -13,9 +13,7 @@ const componentTypesTemplate = require("fs-extra")
   .toString();
 const path = require("path");
 const hcl2json = path.resolve(
-  path.dirname(require.resolve("hcl2json")),
-  "node_modules",
-  ".bin",
+  path.dirname(require.resolve("@terrastack/hcl2json-wasm")),
   "hcl2json"
 );
 
@@ -61,12 +59,16 @@ const parseAndRender = (name, version, description) => {
       .toString("UTF-8")
   );
 
-  const variables = moduleJSON.variable.map(element =>
-    Object.keys(element).map(k => ({
-      key: k,
-      value: element[k][0]
-    }))
-  );
+  let variables = [];
+
+  if (moduleJSON["variable"] !== undefined) {
+    variables = moduleJSON.variable.map(element =>
+      Object.keys(element).map(k => ({
+        key: k,
+        value: element[k][0]
+      }))
+    );
+  }
 
   const view = {
     moduleName: classify(name),

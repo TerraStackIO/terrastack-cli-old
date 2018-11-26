@@ -1,7 +1,7 @@
 {
   "name": "terrastack-cli",
   "description": "Terrastack CLI",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "author": "Sebastian Korfmann",
   "bin": {
     "terrastack": "./bin/run"
@@ -11,15 +11,15 @@
     "@oclif/command": "^1",
     "@oclif/config": "^1",
     "@oclif/plugin-help": "^2",
+    "@terrastack/hcl2json-wasm": "^1",
+    "@terrastack/ink": "^2.0.0",
     "chalk": "^2.4.1",
-    "hcl2json": "^0.2.3",
-    "ink": "^0.5.1",
-    "ink-box": "^0.1.0",
-    "ink-redux": "^1.0.0",
-    "ink-spinner": "^2.0.0",
+    "es6-template-strings": "^2.0.1",
+    "eventemitter2": "^5.0.1",
     "lodash": "^4.17.11",
     "log4js": "^3.0.6",
     "mustache": "^3.0.0",
+    "recursive-copy": "^2.0.9",
     "redux": "^4.0.1",
     "underscore.string": "^3.3.5"
   },

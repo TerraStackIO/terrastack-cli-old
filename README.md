@@ -7,6 +7,10 @@
 [![Downloads/week](https://img.shields.io/npm/dw/terrastack-cli.svg)](https://npmjs.org/package/terrastack-cli)
 [![License](https://img.shields.io/npm/l/terrastack-cli.svg)](https://github.com/terrastackio/terrastack-cli/blob/master/package.json)
 
+```
+export NODE_PRESERVE_SYMLINKS=1 # make yarn link work properly for components - see: http://www.codetunnel.io/you-can-finally-npm-link-packages-that-contain-peer-dependencies/
+```
+
 <!-- toc -->
 * [terrastack-cli](#terrastack-cli)
 * [Usage](#usage)
@@ -21,7 +25,7 @@ $ npm install -g terrastack-cli
 $ terrastack COMMAND
 running command...
 $ terrastack (-v|--version|version)
-terrastack-cli/0.1.0 darwin-x64 node-v10.10.0
+terrastack-cli/0.3.0 darwin-x64 node-v10.10.0
 $ terrastack --help [COMMAND]
 USAGE
   $ terrastack COMMAND
@@ -53,7 +57,7 @@ OPTIONS
   -t, --tag=tag                  (required) Which tag (version) to set for package
 ```
 
-_See code: [src/commands/component.js](https://github.com/terrastackio/terrastack-cli/blob/v0.1.0/src/commands/component.js)_
+_See code: [src/commands/component.js](https://github.com/terrastackio/terrastack-cli/blob/v0.3.0/src/commands/component.js)_
 
 ## `terrastack help [COMMAND]`
 
@@ -81,7 +85,7 @@ USAGE
   $ terrastack stack:apply
 ```
 
-_See code: [src/commands/stack/apply.js](https://github.com/terrastackio/terrastack-cli/blob/v0.1.0/src/commands/stack/apply.js)_
+_See code: [src/commands/stack/apply.js](https://github.com/terrastackio/terrastack-cli/blob/v0.3.0/src/commands/stack/apply.js)_
 
 ## `terrastack stack:destroy`
 
@@ -92,7 +96,7 @@ USAGE
   $ terrastack stack:destroy
 ```
 
-_See code: [src/commands/stack/destroy.js](https://github.com/terrastackio/terrastack-cli/blob/v0.1.0/src/commands/stack/destroy.js)_
+_See code: [src/commands/stack/destroy.js](https://github.com/terrastackio/terrastack-cli/blob/v0.3.0/src/commands/stack/destroy.js)_
 
 ## `terrastack stack:info`
 
@@ -103,7 +107,7 @@ USAGE
   $ terrastack stack:info
 ```
 
-_See code: [src/commands/stack/info.js](https://github.com/terrastackio/terrastack-cli/blob/v0.1.0/src/commands/stack/info.js)_
+_See code: [src/commands/stack/info.js](https://github.com/terrastackio/terrastack-cli/blob/v0.3.0/src/commands/stack/info.js)_
 
 ## `terrastack stack:plan`
 
@@ -114,5 +118,5 @@ USAGE
   $ terrastack stack:plan
 ```
 
-_See code: [src/commands/stack/plan.js](https://github.com/terrastackio/terrastack-cli/blob/v0.1.0/src/commands/stack/plan.js)_
+_See code: [src/commands/stack/plan.js](https://github.com/terrastackio/terrastack-cli/blob/v0.3.0/src/commands/stack/plan.js)_
 <!-- commandsstop -->
