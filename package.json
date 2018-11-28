@@ -76,7 +76,7 @@
   },
   "repository": "terrastackio/terrastack-cli",
   "scripts": {
-    "build": "babel src --out-dir build",
+    "build": "babel src --out-dir build --copy-files",
     "postpack": "rm -f oclif.manifest.json npm-shrinkwrap.json",
     "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap",
     "test": "jest",

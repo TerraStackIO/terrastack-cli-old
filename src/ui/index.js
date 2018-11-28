@@ -1,59 +1,42 @@
-import { render, Box } from "@terrastack/ink";
-// import store from "./store";
+import { render } from "@terrastack/ink";
+import createStore from "./store";
 import { Stack } from "./components/stack";
 import React from "react";
 import { Provider } from "react-redux";
 
-const { createStore } = require("redux");
-
-const store = createStore((state = {}, action) => {
-  if (action.component == undefined) {
-    return state;
-  }
-
-  let layer = action.component._layer;
-  let name = action.component.name;
-  let newState = {};
-  switch (action.type) {
-    case "ADDED":
-      if (state[layer] == undefined) {
-        state[layer] = {};
-      }
-      newState = Object.assign({}, state);
-      newState[layer][name] = "added";
-      return newState;
-    case "START":
-      if (state[layer] == undefined) {
-        state[layer] = {};
-      }
-      newState = Object.assign({}, state);
-      newState[layer][name] = "start";
-      return newState;
-    case "SUCCESS":
-      newState = Object.assign({}, state);
-      newState[layer][name] = "success";
-      return newState;
-    case "FAILED":
-      newState = Object.assign({}, state);
-      newState[layer][name] = "failed";
-      return newState;
-    default:
-      return state;
-  }
-});
-
 const applyVisualization = base => {
   let buffer = [];
+  const store = createStore(base);
 
   base.events.on("component:added", function(component) {
     store.dispatch({ type: "ADDED", component: component });
   });
 
-  base.events.on("component:*:start", function(component) {
+  base.events.on("component:plan:start", function(component) {
     store.dispatch({ type: "START", component: component });
   });
 
-  base.events.on("component:*:success", function(component) {
+  base.events.on("component:apply:start", function(component) {
+    store.dispatch({ type: "START", component: component });
+  });
+
+  base.events.on("component:destroy:start", function(component) {
+    store.dispatch({ type: "START", component: component });
+  });
+
+  base.events.on("component:plan:diff", function(component) {
+    store.dispatch({ type: "DIFF", component: component });
+  });
+
+  base.events.on("component:plan:success", function(component) {
+    store.dispatch({ type: "SUCCESS", component: component });
+  });
+
+  base.events.on("component:apply:success", function(component) {
+    store.dispatch({ type: "SUCCESS", component: component });
+  });
+
+  base.events.on("component:destroy:success", function(component) {
     store.dispatch({ type: "SUCCESS", component: component });
   });
 
