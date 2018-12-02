@@ -6,6 +6,7 @@
 
 const { spawn } = require("child_process");
 const eventbus = require("./eventbus");
+const parser = require("terraform-plan-parser");
 
 class Terraform {
   constructor(component) {
@@ -55,9 +56,11 @@ class Terraform {
       () => {
         eventbus.emit("component:plan:success", this.component);
       },
-      code => {
+      ({ code, stdout }) => {
         // Code 2 means: Succeeded, but there is a diff
         if (code == 2) {
+          const result = parser.parseStdout(stdout);
+          this.component._diff = result;
           eventbus.emit("component:plan:diff", this.component);
         } else {
           eventbus.emit("component:plan:failed", this.component);
@@ -87,7 +90,7 @@ class Terraform {
         this.component.setOutput(JSON.parse(output));
         eventbus.emit(`component:output:success`, this.component);
       },
-      code => {
+      ({ code }) => {
         // eventbus.emit(`component:output:failed`, this.component, code);
         // eventbus.emit("error", this.component);
         // throw "failed";
@@ -124,7 +127,7 @@ class Terraform {
 
       proc.on("close", function(code) {
         if (code !== 0) {
-          reject(code);
+          reject({ code, stdout });
         } else {
           resolve(stdout);
         }
@@ -137,7 +140,7 @@ class Terraform {
       () => {
         eventbus.emit(`component:${command}:success`, this.component);
       },
-      code => {
+      ({ code }) => {
         eventbus.emit(`component:${command}:failed`, this.component, code);
         eventbus.emit("error", this.component);
         throw "failed";
