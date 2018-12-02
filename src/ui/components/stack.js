@@ -32,7 +32,7 @@ class Footer extends Component {
   render() {
     if (_.isEmpty(this.props.issues)) return " ";
     const issues = this.props.issues.map(issue => {
-      return `${issue.component.name}: ${issue.reason}`;
+      return `${issue.component.name}: ${JSON.stringify(issue.component._diff, null, 2)}`;
     });
     return (
       <Box marginTop={1}>

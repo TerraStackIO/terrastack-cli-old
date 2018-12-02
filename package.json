@@ -24,6 +24,7 @@
     "react-redux": "^5.1.1",
     "recursive-copy": "^2.0.9",
     "redux": "^4.0.1",
+    "terraform-plan-parser": "^1.5.0",
     "underscore.string": "^3.3.5"
   },
   "devDependencies": {
@@ -77,6 +78,7 @@
   "repository": "terrastackio/terrastack-cli",
   "scripts": {
     "build": "babel src --out-dir build --copy-files",
+    "build:watch": "babel src --watch --out-dir build --copy-files",
     "postpack": "rm -f oclif.manifest.json npm-shrinkwrap.json",
     "prepack": "oclif-dev manifest && oclif-dev readme && npm shrinkwrap",
     "test": "jest",
