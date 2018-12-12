@@ -9,39 +9,50 @@ const applyVisualization = base => {
   const store = createStore(base);
 
   base.events.on("component:added", function(component) {
-    store.dispatch({ type: "ADDED", component: component });
+    store.dispatch({ type: "ADDED", component });
   });
 
   base.events.on("component:plan:start", function(component) {
-    store.dispatch({ type: "START", component: component });
+    store.dispatch({ type: "START", component });
   });
 
   base.events.on("component:apply:start", function(component) {
-    store.dispatch({ type: "START", component: component });
+    store.dispatch({ type: "START", component });
   });
 
   base.events.on("component:destroy:start", function(component) {
-    store.dispatch({ type: "START", component: component });
+    store.dispatch({ type: "START", component });
   });
 
   base.events.on("component:plan:diff", function(component) {
-    store.dispatch({ type: "DIFF", component: component });
+    store.dispatch({ type: "DIFF", component });
   });
 
   base.events.on("component:plan:success", function(component) {
-    store.dispatch({ type: "SUCCESS", component: component });
+    store.dispatch({ type: "SUCCESS", component });
   });
 
   base.events.on("component:apply:success", function(component) {
-    store.dispatch({ type: "SUCCESS", component: component });
+    store.dispatch({ type: "SUCCESS", component });
   });
 
   base.events.on("component:destroy:success", function(component) {
-    store.dispatch({ type: "SUCCESS", component: component });
+    store.dispatch({ type: "SUCCESS", component });
   });
 
   base.events.on("component:*:failed", function(component) {
-    store.dispatch({ type: "FAILED", component: component });
+    store.dispatch({ type: "FAILED", component });
+  });
+
+  base.events.on("resource:apply:creating", (component, payload) => {
+    store.dispatch({ type: "RESOURCE_CREATING", component, ...payload });
+  });
+
+  base.events.on("resource:apply:created", (component, payload) => {
+    store.dispatch({ type: "RESOURCE_CREATED", component, ...payload });
+  });
+  base.events.on("resource:apply:refreshing", (component, payload) => {
+    store.dispatch({ type: "RESOURCE_REFRESHING", component, ...payload });
   });
 
   base.events.on("output:*", function(_component, output) {
