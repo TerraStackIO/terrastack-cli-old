@@ -15,9 +15,7 @@ class Terraform {
 
   async init() {
     eventbus.emit("component:init:start", this.component);
-    await this._exec("init -force-copy ").then(
-      ...this._defaultCallbacks("init")
-    );
+    await this._exec("init -force-copy ").then(...this._defaultCallbacks("init"));
   }
 
   asyncInit() {
@@ -71,6 +69,34 @@ class Terraform {
     );
   }
 
+  applyOutputParser() {
+    return stdout => {
+      for (let line of stdout.split("\n").filter(String)) {
+        let match = line.match(/^(?<name>[\w\.\[\]]+): (?<rest>.+)$/);
+        if (match) {
+          let resource = match.groups.name;
+          let resourceRest = match.groups.rest;
+
+          if (resourceRest.startsWith("Creating...")) {
+            eventbus.emit("resource:apply:creating", this.component, { resource, time: "0s" });
+          } else if (resourceRest.startsWith("Refreshing state...")) {
+            eventbus.emit("resource:apply:refreshing", this.component, { resource, time: "0s" });
+          }
+
+          match = resourceRest.match(/^Creation complete after (?<time>[\dhms]+)/);
+          if (match) {
+            eventbus.emit("resource:apply:created", this.component, { resource, time: match.groups.time });
+          }
+
+          match = resourceRest.match(/^Still creating... \((?<time>[\dhms]+) elapsed\)/);
+          if (match) {
+            eventbus.emit("resource:apply:creating", this.component, { resource, time: match.groups.time });
+          }
+        }
+      }
+    };
+  }
+
   async state() {
     eventbus.emit("component:state:start", this.component);
     await this._exec("state list").then(...this._defaultCallbacks("state"));
@@ -78,7 +104,7 @@ class Terraform {
 
   async apply() {
     eventbus.emit("component:apply:start", this.component);
-    await this._exec("apply -auto-approve -input=false").then(
+    await this._exec("apply -auto-approve -input=false -lock=false", this.applyOutputParser()).then(
       ...this._defaultCallbacks("apply")
     );
   }
@@ -100,12 +126,11 @@ class Terraform {
 
   async destroy() {
     eventbus.emit("component:destroy:start", this.component);
-    await this._exec("destroy -auto-approve").then(
-      ...this._defaultCallbacks("destroy")
-    );
+    await this._exec("destroy -auto-approve").then(...this._defaultCallbacks("destroy"));
   }
 
-  async _exec(cmd) {
+  async _exec(cmd, stdoutCallback) {
+    stdoutCallback = stdoutCallback || (o => o);
     return new Promise((resolve, reject) => {
       const proc = spawn(`terraform ${cmd} -no-color`, {
         timeout: 0,
@@ -117,8 +142,10 @@ class Terraform {
       let stdout = "";
 
       proc.stdout.on("data", output => {
-        stdout += output.toString();
-        eventbus.emit("output:stdout", this.component, output.toString());
+        let str = output.toString();
+        stdout += str;
+        stdoutCallback(str);
+        eventbus.emit("output:stdout", this.component, str);
       });
 
       proc.stderr.on("data", output => {

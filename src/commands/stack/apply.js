@@ -15,7 +15,7 @@ class ApplyCommand extends Command {
     const stack = require(process.cwd() + "/stack.js");
     const terrastack = new Terrastack(stack);
     applyLogging(terrastack);
-    applyVisualization(terrastack);
+    // applyVisualization(terrastack);
     (async () => {
       await terrastack.apply();
     })();

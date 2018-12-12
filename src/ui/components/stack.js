@@ -7,11 +7,7 @@ import _ from "lodash";
 class Row extends Component {
   render() {
     return (
-      <Box
-        borderBottom={1}
-        borderTop={this.props.index == 0 ? 1 : 0}
-        borderStyle={"classic"}
-      >
+      <Box borderBottom={1} borderTop={this.props.index == 0 ? 1 : 0} borderStyle={"classic"}>
         {this.props.children}
       </Box>
     );
@@ -44,46 +40,19 @@ class Footer extends Component {
   }
 }
 
-class Logs extends Component {
-  render() {
-    if (_.isEmpty(this.props.issues)) return " ";
-    const issues = this.props.issues.map(issue => {
-      return `${issue.component.name}: ${issue.reason}`;
-    });
-    return (
-      <Box marginTop={1}>
-        <Text italic underline>
-          Note: {issues.join(",")}
-        </Text>
-      </Box>
-    );
-  }
-}
-
 class Stack extends Component {
   render() {
-    if (_.isEmpty(this.props.rows)) {
-      return "Nothing to see";
-    } else {
-      const elements = this.props.rows.map((row, index) => (
-        <Row key={index} index={index}>
-          <Box border={1} borderColor="black">
-            <Text>Step: {index}</Text>
-          </Box>
-          {row.map(item => (
-            <StackComponent key={item.name} item={item} />
-          ))}
-        </Row>
-      ));
-
-      return (
-        <Box flexDirection="column">
-          <Header stack={this.props.stack} />
-          {elements}
-          <Footer issues={this.props.issues} />
+    return (
+      <Fragment>
+        <Static />
+        {this.props.finishedResources.map(r => (
+          <Resource componentName={r.componentName} name={r.name} time={r.time} />
+        ))}
+        <Box marginTop={1}>
+          <TestResults passed={results.passed} failed={results.failed} />
         </Box>
-      );
-    }
+      </Fragment>
+    );
   }
 }
 

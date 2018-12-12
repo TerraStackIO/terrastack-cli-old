@@ -30,10 +30,7 @@ class Terrastack {
         if (component.options.destroy) {
           deadComponents.push(component);
         } else {
-          if (
-            _.intersection(Object.values(component.bindings), deadComponents)
-              .length > 0
-          ) {
+          if (_.intersection(Object.values(component.bindings), deadComponents).length > 0) {
             throw "Found a component marked for destroy with dependencies";
           }
         }
@@ -49,8 +46,8 @@ class Terrastack {
       await this.runTaskSequence([
         asyncCompile(this.stack, component),
         terraform.asyncInit(),
-        terraform.asyncPlan(),
-        terraform.asyncOutput()
+        terraform.asyncPlan()
+        // terraform.asyncOutput()
       ]);
     });
   }

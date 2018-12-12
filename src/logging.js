@@ -33,10 +33,10 @@ const applyLogger = base => {
   //   console.log(`${component.name}: ${this.event}`);
   // });
 
-  // base.events.on("error", function(component) {
-  //   console.log(chalk.red.bold.underline(`Error: ${component.name}`));
-  //   console.log(`Recent output: ${_.takeRight(buffer, 50).join("")}`);
-  // });
+  base.events.on("error", function(component) {
+    console.log(chalk.red.bold.underline(`Error: ${component.name}`));
+    console.log(`Recent output: ${_.takeRight(buffer, 50).join("")}`);
+  });
 };
 
 module.exports = applyLogger;
